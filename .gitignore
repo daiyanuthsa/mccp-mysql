@@ -1,0 +1,14 @@
+/.hintrc
+/php_errors.log
+couchdb-data/
+.idea
+admin/files/*.pdf
+/.vscode
+/.docs
+/admin/module/db.ini
+server/node_modules
+package-lock.json
+package.json
+*.sql
+*.rar
+*.zip

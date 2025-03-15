@@ -1,0 +1,21 @@
+[
+  {
+    "id": "docs",
+    "label": "Documentation",
+    "url": "docs",
+    "icon": "book",
+    "subs": [
+      {
+        "id": "doc-framework",
+        "label": "Core Framework",
+        "url": "doc",
+        "icon": "file-earmark-code"
+      }, {
+        "id": "user-manual",
+        "label": "User Manual",
+        "url": "doc/manual",
+        "icon": "question-circle"
+      }
+    ]
+  }
+]

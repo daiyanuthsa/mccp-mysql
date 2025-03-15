@@ -1,0 +1,18 @@
+[submodule "admin/module/wadm"]
+	path = admin/module/wadm
+	url = https://github.com/aryoxp/wis-adm.git
+[submodule "admin/module/waka"]
+	path = admin/module/waka
+	url = https://github.com/aryoxp/wis-aka.git
+[submodule "admin/module/wmon"]
+	path = admin/module/wmon
+	url = https://github.com/aryoxp/wis-mon.git
+[submodule "kb"]
+	path = kb
+	url = https://github.com/aryoxp/core-kb.git
+[submodule "sb"]
+	path = sb
+	url = https://github.com/aryoxp/core-sb.git
+[submodule "mgm"]
+	path = mgm
+	url = https://github.com/aryoxp/core-mgm.git

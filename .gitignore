@@ -6,6 +6,7 @@ admin/files/*.pdf
 /.vscode
 /.docs
 /admin/module/db.ini
+/sample/config/*.ini
 server/node_modules
 package-lock.json
 package.json

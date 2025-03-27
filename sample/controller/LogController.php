@@ -1,17 +1,28 @@
 <?php
 class LogController extends CoreController
 {
-  public function index($count = 1)
+  public function index($count = 1, $batch = null)
   {
-    $count = (int) $count; // Pastikan parameter adalah integer
-    $count = max(1, $count); // Minimal 1, untuk menghindari angka negatif atau 0
+    // Pastikan parameter count adalah integer dan minimal 1
+    $count = max(1, (int) $count);
 
-    $sv = new SampleService();
+    // Pastikan batch adalah integer atau null
+    $batch = $batch !== null ? (int) $batch : null;
 
-    for ($i = 0; $i < $count; $i++) {
-      $sv->insertService();
+    // Menampilkan parameter tambahan jika ada
+    if ($batch !== null) {
+      echo "Additional parameter: $batch<br>";
     }
 
+    // Membuat instance dari SampleService
+    $sv = new SampleService();
+
+    // Memasukkan data sebanyak count yang diminta
+    for ($i = 0; $i < $count; $i++) {
+      $sv->insertService($batch);
+    }
+
+    // Output sukses
     echo "Inserted $count logs successfully.";
   }
 }

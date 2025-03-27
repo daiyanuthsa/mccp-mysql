@@ -5,7 +5,6 @@ class SampleService extends CoreService
   public function doService()
   {
     $db = self::instance('surat');
-    var_dump($db);
     $qb = QB::instance('logs')->select();
     echo $qb->get();
 
@@ -13,13 +12,14 @@ class SampleService extends CoreService
     var_dump($result);
   }
 
-  public function insertService()
+  public function insertService(int $batch)
   {
     $db = self::instance('surat');
   
     $logs = [
       [
         'created_at' => date('Y-m-d H:i:s'),
+        'batch'=> $batch,
         'type' => 'query',
         'content' => 'SELECT * FROM users WHERE id = 1'
       ]

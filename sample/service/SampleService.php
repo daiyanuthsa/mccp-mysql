@@ -12,7 +12,7 @@ class SampleService extends CoreService
     var_dump($result);
   }
 
-  public function insertService(int $batch)
+  public function insertService($batch)
   {
     $db = self::instance('surat');
   

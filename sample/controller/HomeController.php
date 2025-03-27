@@ -24,10 +24,6 @@ class HomeController extends CoreController {
     echo $uri->get(CoreUri::METHOD), "<br>\n";
     print_r($uri->get(CoreUri::ARGS)) . "<br>\n";
     echo $uri->get(CoreUri::URI), "<br>\n";
-
-
-    $sv = new SampleService();
-    $sv->doService();
   }
 
   public function log(){

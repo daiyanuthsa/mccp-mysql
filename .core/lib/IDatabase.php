@@ -4,6 +4,8 @@ defined('CORE') or (header($_SERVER["SERVER_PROTOCOL"] . " 403 Forbidden") and d
 
 interface IDatabase {
 
+	
+
 	// instantiation template
 	public static function instance( $config );
 	

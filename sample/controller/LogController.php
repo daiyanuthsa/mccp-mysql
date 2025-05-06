@@ -1,28 +1,34 @@
 <?php
 class LogController extends CoreController
 {
-  public function index($count = 1, $batch = null)
+  public function index($configKey, $count = 1)
   {
     // Pastikan parameter count adalah integer dan minimal 1
     $count = max(1, (int) $count);
-
-    // Pastikan batch adalah integer atau null
-    $batch = $batch !== null ? (int) $batch : null;
-
-    // Menampilkan parameter tambahan jika ada
-    if ($batch !== null) {
-      echo "Additional parameter: $batch<br>";
-    }
 
     // Membuat instance dari SampleService
     $sv = new SampleService();
 
     // Memasukkan data sebanyak count yang diminta
     for ($i = 0; $i < $count; $i++) {
-      $sv->insertService($batch);
+      $sv->insertService( $configKey);
     }
 
     // Output sukses
     echo "Inserted $count logs successfully.";
+  }
+  public function reset($configKey){
+    $sv = new SampleService();
+    $sv->reset($configKey);
+    echo "Reset table successfully.";
+  }
+
+  public function stats($configKey)
+  {
+    $sv = new SampleService();
+    $sv->sizeStats($configKey);
+    echo "<br>";
+    $sv->timeStats($configKey);
+    
   }
 }

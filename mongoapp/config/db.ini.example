@@ -18,3 +18,14 @@ database   = "skripsi"
 charset    = "utf8mb4"
 collate    = "utf8mb4_general_ci"
 persistent = false
+
+[mongodb]
+driver     = "mongodb"
+uri        = "mongodb://{user}:{password}@{host}:27017/"
+host       = "34.126.89.156"
+user       = ""
+password   = ""
+database   = "research"
+charset    = ""
+collate    = ""
+persistent = false

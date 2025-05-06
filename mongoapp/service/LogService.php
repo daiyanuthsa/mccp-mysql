@@ -17,6 +17,14 @@ class LogService extends CoreDBMongo
             ->insert($logs);
         return $result;
     }
+    public function collectionStatus($collectionName){
+        $mongo = CoreDBMongo::instance('mongodb');
+        return $mongo->getCollectionStats($collectionName);
+    }
+    public function reset($collectionName){
+        $mongo = CoreDBMongo::instance('mongodb');
+        return $mongo->resetCollection($collectionName);
+    }
 }
 
 ?>

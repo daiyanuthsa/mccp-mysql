@@ -12,7 +12,37 @@ persistent = false
 [surat]
 driver     = "mysqli"
 host       = "localhost"
-user       = "root"
+user       = ""
+password   = ""
+database   = "skripsi"
+charset    = "utf8mb4"
+collate    = "utf8mb4_general_ci"
+persistent = false
+
+[inodb]
+driver     = "mysqli"
+host       = ""
+user       = ""
+password   = ""
+database   = "skripsi"
+charset    = "utf8mb4"
+collate    = "utf8mb4_general_ci"
+persistent = false
+
+[myisam]
+driver     = "mysqli"
+host       = ""
+user       = ""
+password   = ""
+database   = "skripsi"
+charset    = "utf8mb4"
+collate    = "utf8mb4_general_ci"
+persistent = false
+
+[archive]
+driver     = "mysqli"
+host       = ""
+user       = ""
 password   = ""
 database   = "skripsi"
 charset    = "utf8mb4"

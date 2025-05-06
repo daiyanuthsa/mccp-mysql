@@ -19,12 +19,12 @@ charset    = "utf8mb4"
 collate    = "utf8mb4_general_ci"
 persistent = false
 
-[inodb]
+[innodb]
 driver     = "mysqli"
 host       = ""
 user       = ""
 password   = ""
-database   = "skripsi"
+database   = "skripsi_innodb"
 charset    = "utf8mb4"
 collate    = "utf8mb4_general_ci"
 persistent = false
@@ -34,7 +34,7 @@ driver     = "mysqli"
 host       = ""
 user       = ""
 password   = ""
-database   = "skripsi"
+database   = "skripsi_myisam"
 charset    = "utf8mb4"
 collate    = "utf8mb4_general_ci"
 persistent = false
@@ -44,7 +44,7 @@ driver     = "mysqli"
 host       = ""
 user       = ""
 password   = ""
-database   = "skripsi"
+database   = "skripsi_archive"
 charset    = "utf8mb4"
 collate    = "utf8mb4_general_ci"
 persistent = false

@@ -13,3 +13,4 @@ package.json
 *.sql
 *.rar
 *.zip
+/admin/*

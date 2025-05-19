@@ -12,7 +12,7 @@ class SampleService extends CoreService
     var_dump($result);
   }
 
-  public function insertService( $configKey = 'surat')
+  public function insertService( $configKey = 'innodb')
   
   {
     $db = self::instance($configKey);
@@ -27,7 +27,7 @@ class SampleService extends CoreService
     $qb = QB::instance('logs')->insert($logs);
     $db->query($qb);
   }
-  public function reset($configKey = 'surat')
+  public function reset($configKey = 'innodb')
   {
     $db = self::instance($configKey);
 
@@ -62,7 +62,7 @@ class SampleService extends CoreService
 
 
 
-  public function sizeStats($configKey = 'surat')
+  public function sizeStats($configKey = 'innodb')
   {
     $db = self::instance($configKey);
     $sql = "

@@ -68,7 +68,7 @@ class SampleService extends CoreService
     $sql = "
         SELECT ROUND((data_length + index_length), 2) AS `Total Size (Byte)`
         FROM information_schema.tables
-        WHERE table_schema = 'skripsi'
+        WHERE table_schema = 'skripsi_{$configKey}'
           AND table_name = 'logs'
         LIMIT 1;
     ";

@@ -118,9 +118,15 @@ class SampleService extends CoreService
     $db = self::instance($configKey);
     $sql = "SELECT COUNT(*) AS total FROM logs";
     $result = $db->query($sql);
+    
 
-    if ($result && $row = $result->fetch_assoc()) {
-      echo "[Total Rows] => {$row['total']}";
+    if ($result) {
+      // If $result is an array of objects (e.g., array of stdClass)
+      if (is_array($result) && isset($result[0]->total)) {
+      echo "[Total Rows] => {$result[0]->total}";
+      } else {
+      echo "Tidak ada hasil atau terjadi kesalahan.";
+      }
     } else {
       echo "Tidak ada hasil atau terjadi kesalahan.";
     }

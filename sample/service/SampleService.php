@@ -113,5 +113,18 @@ class SampleService extends CoreService
     }
   }
 
+  public function countLogs($configKey = 'innodb')
+  {
+    $db = self::instance($configKey);
+    $sql = "SELECT COUNT(*) AS total FROM logs";
+    $result = $db->query($sql);
+
+    if ($result && $row = $result->fetch_assoc()) {
+      echo "[Total Rows] => {$row['total']}";
+    } else {
+      echo "Tidak ada hasil atau terjadi kesalahan.";
+    }
+  }
+
 
 }

@@ -29,6 +29,8 @@ class LogController extends CoreController
     $sv->sizeStats($configKey);
     echo "<br>";
     $sv->timeStats($configKey);
+    echo "<br>";
+    $sv->countLogs($configKey);
     
   }
 }

@@ -12,8 +12,7 @@ class SampleService extends CoreService
     var_dump($result);
   }
 
-  public function insertService( $configKey = 'innodb')
-  
+  public function insertService($configKey = 'innodb')
   {
     $db = self::instance($configKey);
 
@@ -56,6 +55,13 @@ class SampleService extends CoreService
         COLLATE='utf8mb4_0900_ai_ci'
         ENGINE={$engine}
     ";
+    // Tambahkan opsi kompresi hanya untuk InnoDB
+    if ($engine === 'InnoDB') {
+      $createTableSQL .= "
+      PAGE_COMPRESSED=1
+      PAGE_COMPRESSION_LEVEL=5
+  ";
+    }
 
     $db->query($createTableSQL);
   }
@@ -118,14 +124,14 @@ class SampleService extends CoreService
     $db = self::instance($configKey);
     $sql = "SELECT COUNT(*) AS total FROM logs";
     $result = $db->query($sql);
-    
+
 
     if ($result) {
       // If $result is an array of objects (e.g., array of stdClass)
       if (is_array($result) && isset($result[0]->total)) {
-      echo "[Total Rows] => {$result[0]->total}";
+        echo "[Total Rows] => {$result[0]->total}";
       } else {
-      echo "Tidak ada hasil atau terjadi kesalahan.";
+        echo "Tidak ada hasil atau terjadi kesalahan.";
       }
     } else {
       echo "Tidak ada hasil atau terjadi kesalahan.";

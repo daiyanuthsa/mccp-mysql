@@ -112,7 +112,7 @@ class SampleService extends CoreService
     $db = self::instance($configKey);
     $sql = "SELECT COUNT(*) AS total FROM logs";
     $result = $db->query($sql);
-
+var_dump($result);
     if ($result === false) {
       echo "Query error: " . $db->error;
       return;

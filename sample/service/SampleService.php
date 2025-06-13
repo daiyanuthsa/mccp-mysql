@@ -99,7 +99,7 @@ class SampleService extends CoreService
     ";
 
     $result = $db->query($sql);
-
+    var_dump($result);
     if ($result && $row = $result->fetch_assoc()) {
       // Cek jika hasilnya ada (tidak NULL), karena bisa NULL jika tabel kosong.
       if ($row['duration_microseconds'] !== null) {

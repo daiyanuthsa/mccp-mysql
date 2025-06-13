@@ -87,32 +87,23 @@ class SampleService extends CoreService
   }
 
 
-  public function timeStats($configKey = 'surat')
+  public function timeStats($configKey = 'innodb')
   {
     $db = self::instance($configKey);
-    // Kueri ini menghitung selisih langsung di database dengan presisi mikrodetik.
-    // Jauh lebih efisien daripada mengambil data mentah dan menghitung di PHP.
     $sql = "
         SELECT 
-            TIMESTAMPDIFF(MICROSECOND, MIN(log_timestamp), MAX(log_timestamp)) AS duration_microseconds 
+            TIMESTAMPDIFF(MICROSECOND, MIN(created_at), MAX(created_at)) AS duration_microseconds 
         FROM logs
     ";
 
     $result = $db->query($sql);
-    var_dump($result);
     if ($result && $row = $result->fetch_assoc()) {
-      // Cek jika hasilnya ada (tidak NULL), karena bisa NULL jika tabel kosong.
       if ($row['duration_microseconds'] !== null) {
-        // Konversi dari mikrodetik ke detik (hasilnya adalah float/desimal).
         $durationSeconds = (float) $row['duration_microseconds'] / 1000000.0;
-
-        // Kembalikan nilai agar bisa digunakan di bagian lain, jangan di-echo langsung.
         echo "[Total Duration (Second)] => {$durationSeconds}";
+        return;
       }
-      echo "Tidak ada hasil atau terjadi kesalahan.";
     }
-
-    // Jika terjadi error, query gagal, atau tabel kosong, kembalikan null.
     echo "Tidak ada hasil atau terjadi kesalahan.";
   }
 
@@ -122,14 +113,8 @@ class SampleService extends CoreService
     $sql = "SELECT COUNT(*) AS total FROM logs";
     $result = $db->query($sql);
 
-
-    if ($result) {
-      // If $result is an array of objects (e.g., array of stdClass)
-      if (is_array($result) && isset($result[0]->total)) {
-        echo "[Total Rows] => {$result[0]->total}";
-      } else {
-        echo "Tidak ada hasil atau terjadi kesalahan.";
-      }
+    if ($result && $row = $result->fetch_assoc()) {
+      echo "[Total Rows] => {$row['total']}";
     } else {
       echo "Tidak ada hasil atau terjadi kesalahan.";
     }

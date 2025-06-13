@@ -112,15 +112,10 @@ class SampleService extends CoreService
     $db = self::instance($configKey);
     $sql = "SELECT COUNT(*) AS total FROM logs";
     $result = $db->query($sql);
-var_dump($result);
-    if ($result === false) {
-      echo "Query error: " . $db->error;
-      return;
-    }
 
-    $row = $result->fetch_assoc();
-    if ($row) {
-      echo "[Total Rows] => {$row['total']}";
+    // Jika hasilnya array dan elemen pertama adalah object
+    if (is_array($result) && isset($result[0]->total)) {
+      echo "[Total Rows] => {$result[0]->total}";
     } else {
       echo "Tidak ada hasil atau terjadi kesalahan.";
     }

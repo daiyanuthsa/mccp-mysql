@@ -113,7 +113,13 @@ class SampleService extends CoreService
     $sql = "SELECT COUNT(*) AS total FROM logs";
     $result = $db->query($sql);
 
-    if ($result && $row = $result->fetch_assoc()) {
+    if ($result === false) {
+      echo "Query error: " . $db->error;
+      return;
+    }
+
+    $row = $result->fetch_assoc();
+    if ($row) {
       echo "[Total Rows] => {$row['total']}";
     } else {
       echo "Tidak ada hasil atau terjadi kesalahan.";

@@ -18,7 +18,6 @@ class SampleService extends CoreService
 
     $logs = [
       [
-        'created_at' => date('Y-m-d H:i:s'),
         'type' => 'query',
         'content' => '{"connection":"mysql","bindings":[],"time":"0.82","slow":false,"file":"C:\\laragon\\www\\filament-POS-Accounting\\public\\index.php","line":17,"hash":"f48fa5df8fd323d753d03a2e0070fcde","hostname":"LAPTOP-FEQ7AU48"}'
       ]
@@ -48,7 +47,7 @@ class SampleService extends CoreService
     $createTableSQL = "
         CREATE TABLE `logs` (
             `batch` INT(10) NULL DEFAULT NULL,
-            `created_at` DATETIME NOT NULL,
+            `created_at` TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
             `type` ENUM('query','view','command') NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
             `content` JSON NULL DEFAULT NULL
         )
@@ -91,32 +90,30 @@ class SampleService extends CoreService
   public function timeStats($configKey = 'surat')
   {
     $db = self::instance($configKey);
-
-    // Ambil created_at paling awal dan paling akhir
+    // Kueri ini menghitung selisih langsung di database dengan presisi mikrodetik.
+    // Jauh lebih efisien daripada mengambil data mentah dan menghitung di PHP.
     $sql = "
         SELECT 
-            MIN(created_at) AS first_time, 
-            MAX(created_at) AS last_time 
+            TIMESTAMPDIFF(MICROSECOND, MIN(log_timestamp), MAX(log_timestamp)) AS duration_microseconds 
         FROM logs
     ";
 
     $result = $db->query($sql);
 
     if ($result && $row = $result->fetch_assoc()) {
-      $firstTime = strtotime($row['first_time']);
-      $lastTime = strtotime($row['last_time']);
+      // Cek jika hasilnya ada (tidak NULL), karena bisa NULL jika tabel kosong.
+      if ($row['duration_microseconds'] !== null) {
+        // Konversi dari mikrodetik ke detik (hasilnya adalah float/desimal).
+        $durationSeconds = (float) $row['duration_microseconds'] / 1000000.0;
 
-      if ($firstTime && $lastTime) {
-        $durationSeconds = $lastTime - $firstTime;
-
-        // Output sesuai format
+        // Kembalikan nilai agar bisa digunakan di bagian lain, jangan di-echo langsung.
         echo "[Total Duration (Second)] => {$durationSeconds}";
-      } else {
-        echo "Format waktu tidak valid.";
       }
-    } else {
       echo "Tidak ada hasil atau terjadi kesalahan.";
     }
+
+    // Jika terjadi error, query gagal, atau tabel kosong, kembalikan null.
+    echo "Tidak ada hasil atau terjadi kesalahan.";
   }
 
   public function countLogs($configKey = 'innodb')
